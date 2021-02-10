@@ -1,0 +1,27 @@
+\chapter*{Abstract}
+%Context, Content and Conclusion summarized to 1 page.
+% English version:
+
+Machine tools (MTs) are needed to produce precise workpieces, that can be found in almost all areas of life. This includes vehicles, aircrafts or electrical equipment containing components manufactured on such MTs. Great efforts are needed on accuracy as well as productivity. For this reason, 5-axis MTs are used which make it possible to complete workpieces in as few setups as possible. However, this has the disadvantage that more axes introduce deviations at the tool center point (TCP) that reduces the overall accuracy of the MT. The main reasons for this are thermally induced errors, which make it difficult to maintain the required tolerances. Hence, powerful methods are needed to solve the problem efficiently.
+
+This thesis deals with methods that counteract thermal errors. A model is needed to predict the thermal behaviour of the MT. The model requires inputs which are recorded by sensors. In the case of this work these are temperature sensors. The problem is that not all inputs are relevant when creating the model. Therefore the question arises how to select the relevant inputs. How this problem can be solved in an efficient way is the core of this thesis. This selection should also be made autonomous and adaptive. Autonomous means that the inputs are selected robustly by means of a mathematical model, without manual intervention. Adaptive means that a new selection is made when a tolerance is exceeded.
+
+
+The Group LASSO method is used to solve the problem. In order to define an optimal model structure, an additional optimisation is required. For this purpose the Particle Swarm Optimisation (PSO) is used. The combination of these methods leads to more robust results compared to previous methods.  In conclusion, the implementation is a success and will be continued in the context of further work.
+
+
+%------------------------------------------
+\cleardoublepage
+\chapter*{Zusammenfassung}
+
+Werkzeugmaschinen werden benötigt, um immer genauere Werkstücke zu fertigen, welche in fast allen Bereichen des Lebens anzutreffen sind. Dazu zählen Fahrzeuge, Flugzeuge oder elektrische Geräte, welche Bauteile enthalten, die auf solchen Maschinen gefertigt werden. Es werden daher hohe Anforderungen an die Genauigkeit, wie aber auch an die Produktivität gestellt. Aus diesem Grund werden 5-Achs Werkzeugmaschine eingesetzt, die es ermöglichen ein Bauteil in möglichst wenigen Aufspannungen komplett zu bearbeiten. Dies hat jedoch den Nachteil, dass durch die zwei zusätzlichen Achsen im Vergleich zur 3-Achs Werkzeugmaschine die möglichen Abweichungen innerhalb der kinematischen Kette stark zunehmen. Die Hauptursache bilden dabei thermisch induzierte Fehler, welche es schwierig machen, die geforderten Toleranzen einzuhalten.  Aus diesem Grund werden leistungsstarke Methoden benötigt, die das Problem effizient lösen können.
+
+Diese Arbeit setzt sich mit den Methoden auseinander, die es ermöglichen, den thermischen Fehlern entgegenzuwirken. Dafür wird ein Model benötigt, welches das Verhalten der Maschine voraussagen kann. Diese Vorhersage wird dann genutzt, um mittels Maschinensteuerung die Fehler zu kompensieren. Bei der Arbeit mit diesen Modellen werden immer sehr viele Daten gesammelt, von denen jedoch nicht alle von Relevanz sind. Es ist daher von großem Interesse, dass die Daten, welche wichtig sind effizient und mit einer eindeutigen Methode ausgewählt werden können. Diese Auswahl muss autonom und adaptiv gemacht werden. Autonom heisst in diesem Fall, dass die Inputs Modelbasiert gewählt werden und kein manuelles eingreifen erforderlich ist. Adaptiv heisst, dass die Inputs neu gewählt werden, sobald eine vorgegeben Toleranz überschritten wird. 
+
+Zur Lösung des Problems kommt die Group LASSO Methode zum Einsatz. Um eine optimale Modelstruktur zu definieren wird zusätzlich eine optimierungsmethode benötigt, die das Problem effizient lösen kann. Als geeignet hat sich dabei die Partikel Schwarm Optimierung (PSO) herausgestellt. Die Resultaten, welche aus dem Zusammenspiel dieser Methoden erzielt werden können, zeigen ein robusteres Verhalten, als dies bisherige Methoden zeigen. Abschließend kann deshalb gesagt werden, dass die Implementierung ein Erfolg ist und im Rahmen von weiteren Arbeiten fortgeführt wird.
+
+
+
+
+
+%

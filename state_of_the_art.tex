@@ -1,0 +1,108 @@
+\chapter{State of the Art}
+\label{chp:stateoftheart}
+
+This chapter gives an overview of the methods currently used. First of all, the topic of thermal errors is introduced, which form the basis for this thesis. In the next step the TALC method is introduced, that is also used in this thesis. Further the adaptive input selection is described. Finally, the disadvantages of the previous methods and it illustrates why alternatives are needed.
+
+%***********************************************************************
+\section{Thermal Errors}
+\label{sec:thermalerrors}
+
+The problem of thermal errors in the construction of MTs exists almost as long as MTs are built. Mayr et al. \cite{Mayr_2012} stated that over 75\% of geometric errors are caused by thermal influences. This shows that thermal errors cannot be neglected and must be taken into account in the design and operation of MTs. As already mentioned in the introduction, this adjustment can be made in the design phase. This is done through a thermo symmetric design, suitable materials and cooling of temperature critical components such as electrical machines. This approach has the disadvantage that it is relatively expensive and adjustments can only be made in the design phase. Such a MT can therefore only deal with planned influences. For this reason, the problem is separated from the hardware and handled by software, with which the thermal errors are compensated. This is more cost efficient and much more flexible. It has been shown that thermal error compensation is cost efficient and can be retrofitted to existing machines.  All these reasons have led to the fact that the topic has been relevant for a long time \cite{Yang_1996}, and a lot of research is still being done on it.
+
+The temperatures in a MT are inhomogeneously distributed, which leads to deformation of the entire structure. Since a MT consists of many different materials, this effect is further increased. This leads to the result that the theoretical position of the TCP deviates from the effective position. This deviation is unknown for the machine control and causes the MT to lose accuracy. Mayr et al. \cite{Mayr_2012} gives a good overview of the topic of this thermal issues.
+
+To better understand these thermal errors, it is important to know where the heat that is responsible for these comes from. A distinction is made between internal and external heat sources. As shown in figure \ref{fig:thermalcauses}, internal influences come, from the spindle, the axis drives or the cutting process. Important external influences are for example the change between day and night, as well as longer cyclical differences, such as the change between the seasons. Another important external factor is the cooling lubricant, which Mayr et al. \cite{Mayr_2014,Mayr_2015} has dealt with in detail. And not to be neglected is also the interaction between several machines set up in a factory building, as such a MT dissipates a considerable amount of heat. 
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Inkscape/thermische_wirkkette} %NOTE that no .pdf has to be written
+    \caption[Thermal chain of causes]{Thermal chain of causes: On the upper left side, the internal influences are shown. On the upper right side, the effect to the TCP can be seen. On the bottom, the external influences are shown}
+    \label{fig:thermalcauses}
+\end{figure}
+
+It is therefore clear that thermal errors have a considerable influence on the accuracy of MTs. These cannot be eliminated in an energyefficient way by design options alone. The problem was recognized early on by Bryan et al. \cite{Bryan_1990} and Weck et al. \cite{Weck_1995}, which have been dealing with this issue since the early 1990's.
+
+
+%***********************************************************************
+
+\section{Thermal Adaptive Learning Control}
+\label{sec:TALC}
+
+Starting from the problem of thermal errors, it is now a matter of finding an efficient method to solve them. It is shown that phenomenological models introduced by Gebhardt et al. \cite{Gebhardt_2014}, Mayr et al. \cite{Mayr_2015} and Brecher et al. \cite{Brecher_2004} are well suited for this purpose. These represent a connection between the observed thermal errors and their causes. One problem with phenomenological models is that they have only limited long-term stability. This is due to the fact that not all possible states are included in the training time.
+
+Temperature data are collected in the environment and inside the MT. Furthermore, the thermal error are measured. With these data it is possible to create a model which can be used for compensation afterwards. With such a setup it is now possible to compensate the thermal errors of a MT.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Inkscape/TALC} %NOTE that no .pdf has to be written
+    \caption[Adaptive Input Selection]{Schematic of the concept of thermal adaptive learning control (TALC).}
+    \label{fig:talc_inputselection}
+\end{figure}
+
+
+In order to increase the long-term robustness of phenomenological models, Blaser et al. \cite{Blaser_2017} developed the TALC method, which combines these models with periodic on-machine measurements to realize a thermal compensation control, which is shown in figure \ref{fig:talc_inputselection}. The problem is, that the positions of the temperature sensors used need to be known in advance. They must therefore be positioned manually. To achieve good results, the operator must have a lot of experience.
+
+In order to create the model, temperature data and the thermal errors of the axes are required. The temperature data can be collected relatively easily using sensors. Thereby, measured values can be recorded with a high sampling rate. It is more difficult with the thermal errors. These must be measured directly on the MT with a measuring cycle. This has the consequence that the MT is not productive during this time, which is undesirable. It is therefore desirable that the MT is operated as less often as possible in the measuring cycle. 
+
+In summary, accuracy can be increased with the TALC method. The disadvantage is that the quality of compensation depends on how the temperature sensors are positioned. A method which selects sensors autonomously and based on the measured data would therefore be required. Possible approaches of such methods are introduced in the following sections.
+
+\section{Sensor Selection}
+\label{sec:sensor_selectiom}
+
+In practice, sensors are usually selected manually as described above. Methods for automatic selection are not widely applied yet. The situation is different at research level. There exist different approaches how the optimal sensor selection could be achieved. 
+
+One possible approach is taken by Tan et al. \cite{Tan_2017}, who use the Group LASSO method to select the inputs. In contrast to the Group LASSO method, which is introduced in this thesis, he uses the Group LASSO method only for input selection and does not calculate the compensation model in parallel. To model the thermal errors afterwards, he uses a Supported Vector Machine (SVM), which is introduced by Suykens et. al \cite{Suykens_2000}.
+
+
+\section{Adaptive Input Selection}
+\label{sec:Adaptiveinputselection}
+
+The adaptive input selection aims to automatically adjust the optimal inputs over time to changing thermal conditions. 
+
+Figure \ref{fig:TALC_ablauf} shows the combination of TALC and adaptive input selection. Note that the TALC model  without input selection (dashed line) and the TALC model with input selection (solid line) is shown. On the left side you can see the calibration phase with increased measuring cycle interval. In this phase, data are collected to make a first compensation model and an input selection. It is easy to see that the compensation based on a model with input selection gives much better results. 
+
+After the calibration phase, the on-machine measurements are performed in larger intervals, which can be seen by the blue lines. At these intervals a parameter update is performed, but no inputs are selected. If the Action Control Limit (ACL) is exceeded, the frequency of on-machine measurements is increased to ensure that there is enough data for a new input selection. In the figure it can be clearly seen that after a new input selection a better accuracy can be achieved. 
+
+Compared to the TALC method without input selection, significantly better results can be achieved, which can be guaranteed over a longer period of time. The adaptive input selection thus enables the desired long-term stability of the MT.
+
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\linewidth]{powertpiont/TALC_ablauf} %NOTE that no .pdf has to be written
+    \caption[Static vs. Adaptive Sensor set]{Schematic representation of the TALC method in combination with the input selection. On the far left the calibration phase can be seen, in which measurements are made at an increased frequency. This is followed by operation in compensation mode until the ACL is exceeded, where the frequency is increased again. \cite{Blaser_2017}}
+    \label{fig:TALC_ablauf}
+\end{figure}
+
+
+\subsection{Times Series Cluster Kernel Method}
+\label{sec:introTCK}
+
+The time sereis cluster kernel method, suggested by Zimmermann et al. \cite{Zimmermann_2020}, offers the possibility of adaptive input selection. The procedure includes five steps, which are shown in figure \ref{fig:5steps}. The problem is that a method is needed that can handle incomplete data sets, since complete data of the axis errors are only available during the calibration phase and the Not-Good (NG) modes.
+
+The first step is to normalize the time series of temperature data and time series of the thermal errors. This is necessary so that original data with different scales can be compared. All time series are separately normalized and standardized so that they all have a mean value of zero and a standard deviation of one.
+
+In the second step the temperature data is clustered using the k-means clustering algorithm \cite{Lloyd_1982}. The individual inputs are thereby divided into groups, so-called clusters, which have similarities. In the subsequent model generation, only one input from a cluster may be selected at a time, since inputs from a cluster have a certain colinearity. The classification of the clusters does not have to be done manually, but results automatically from the existing input \cite{Pelleg_2000}. 
+
+The third step forms the core of the input selection. Here the signals of the normalized time series of temperatures and the considered thermal error are compared to model the thermal error using the optimal input. Because no complete data series are available, a method is needed that can handle them. The time series Cluster Kernel (TCK) method introduced by Mikalsen et al. \cite{Mikalsen_2018} has proven to be a suitable method for this purpose.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Inkscape/adaptive_inputselection} %NOTE that no .pdf has to be written
+    \caption[Scheme of the TCK method]{Iterative procedure of the input selection and mdelling used for the adaptive input selection, which is conducted for each considered compensation model. \cite{Zimmermann_2020}}
+    \label{fig:5steps}
+\end{figure}
+
+The fourth step is to create the compensation Model \cite{Mayr_2018}. For this step the unnormalized time series are needed.  Using the temperature data and the uncompensated errors, the compensation model can be created, which corresponds to the difference between the prediction and the uncompensated error. Since only one input is not sufficient to cover the whole spectrum, the process is repeated and a second sensor is selected. This is repeated until a predefined maximum of inputs or the maximal number of clusters is reached. 
+
+In the last step the final model is selected. To find the optimum between the number of inputs and the quality achieved, the Akaike Information Criterion (AIC) is used, which is introduced in the section \ref{sec:Akaike}.
+
+The TCK procedure is a sequential procedure. This means that the input selection and the model creation are done sequentially. This means that the procedure requires a relatively large number of calculation steps, which can be seen as a disadvantage of this method.
+
+
+
+\section{Research Gap}
+\label{sec:researchgap}
+
+From previous considerations, the question arises how the approach could be improved. Since the TCK method is a sequential process in which the individual steps are made one after the other, the question arises whether it could be done in parallel. First, the selection of the optimal inputs and second the calculation of the model parameters should therefore take place parallel in one step. The Group LASSO method offers the possibility to combine these two steps and is therefore examined in more detail in this thesis. With the later introduce (PSO), the parameter of the used model are optimized in parallel to the Group LASSO method. The combination of these all this methods is not applied to the thermal compensation of MTs so far. For this reason, the topic forms an interesting basis, which should be evaluated in this thesis.
+
+

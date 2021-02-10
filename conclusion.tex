@@ -1,0 +1,27 @@
+\chapter{Conclusion and Future Work}
+
+%***********************************************************************
+\section{Conclusion}
+
+This thesis deals with the compensation of thermal errors of MTs. Adaptive Input selection using the Group LASSO method allows a confident selection of the optimal inputs and guarantees stable operation over a long period of time.
+
+The results obtained show that the methods can be applied. The interaction of the different methods (Group LASSO, TALC and PSO) works well. It is possible to update the parameters, select the optimal inputs and determine the optimal order of the ARX model, all in parallel. The evaluation shows that the methods work well together. In order to be able to classify the results, a comparison is made with the TCK method, which shows that at least the same quality can be achieved, if not slightly better. 
+
+The aim of this thesis is the evaluation of the Group LASSO method. On the basis of the results and comparisons this can be considered approved. The Group LASSO method works in combination with the TALC method applied to thermal compensation in machine tools.
+
+%***********************************************************************
+\section{Future Work}
+
+The implementation of the Group LASSO method basically works very well. Nevertheless, there are certain points that can be improved. There are small things about the Group LASSO method that still need to be improved. The problem lies in the efficiency of the PSO algorithm.
+
+The main problem with the current implementation is the computing time required. Due to the long computing time, it is currently not possible to compensate the thermal errors of all axes simultaneously in real time. Future work should therefore focus on the detailed implementation of the code. This increase in efficiency must take place on three levels. First on the software side, second on the hardware side and finally there are mathematical possibilities for optimisation.
+
+The first thing on the software side is to consider where the code could be vectorized. This would mean an increase in efficiency over using a $for$-loop.  The second step is to think about an implementation in another language. Preferably C ++ has to be reconsidered. This would result in a dramatic increase in efficiency, which would make the method real-time capable. And a further step would have to be the implementation of PSO by itself. In this work, this is done by rounding after each iteration. However, there is some literature on how to tackle the problem more efficient. This could lead to a further increase in efficiency and an increase in the quality of the method.
+
+On the hardware side, outsourcing to a cluster must be considered. If the action control limit was exceeded, the code with the collected data would be sent to the cluster, where the complex calculation would be carried out and the solution obtained would be sent back to the machine tool.
+
+All of these improvements would make the method a very powerful tool to minimize thermal errors in machine tools. The machine has the ability to learn by itself. It is therefore possible to create a model autonomously without detailed knowledge of the machine behaviour.
+
+
+
+
