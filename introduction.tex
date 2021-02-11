@@ -4,16 +4,25 @@
 \chapter{Introduction}
 \label{sec:introduction}
 
-This is my 
-
-The goal of this thesis is the implementation and evaluation of the Group LASSO method applied to the adaptive input selection of thermal compensation models. In order to validate the methodology, a comparison with the previous Time series Cluster Kernel (TCK) method, which was introduced by Zimmermann et al. \cite{Zimmermann_2020}, is made.
-
+This chapter introduce the topic of the thesis.
 
 %-----------------------------------------------------
 \section{Motivation}
 \label{sec:motivation}
 
-Modern 5-axis MTs are important to produce accurate work pieces.  According to Mayr et al. \cite{Mayr_2012}, thermal errors have the largest impact on accuracy of  MTs. Hence, the interest lies in minimizing thermal errors as much as possible. One could come up with the idea of minimizing the thermal influences so that the errors do not arise. In order to achieve this, factory buildings, where the MTs are located could be air-conditioned so that the MT is in a stable environment. According to Putz et al \cite{Putz2018}, 55\% of production companies operate their machines in such an environment to ensure that the required accuracy is maintained. If we now look at the working space of a MT and compare it with the volume of the factory building in which it is located, it is easy to see that it is very cost and energy inefficient to air-condition the entire building. From an economic and ecological point of view, such an approach is therefore not reasonable. The relationship between energy consumption, productivity and the resulting profitability are summarised graphically in the figure \ref{fig:prf_accuracy}. 
+The largest proportion of machine tool errors is due to thermal causes.
+
+The machine tool is a complex thermal system.
+
+For this reason, model-based compensation is used, which leads to higher dimensional systems that have to be optimized.
+
+\subsection{Evolution of MT}
+\label{sec:evolution}
+
+The evolution of the machine tool can be divided into four epochs. It all started with the Manuel operated machine tool. This consisted of a spindle drive and axes, which had to be operated by the operator via hand cranks. Compensation for thermal errors was not yet possible. The accuracy of the workpieces depended heavily on the operator, who needed a lot of feeling to produce accurate parts. 
+
+The Great Revolution was the introduction of the numerically controlled machine tool (NC-MT). This was made possible by developments in computer technology, which allows the axes to be controlled individually. The MT's must be equipped with drives on the axes so that they can be moved automatically. These drives are controlled via the NC control, which allows the axes to be interpolated with each other. At the time of these developments, compensation for thermal errors was still out of the question. However, it became possible to compensate the tools. This meant that the operator no longer had to program the contour of his TCP, but could directly convert the contour of the workpiece. 
+
 
 \begin{figure}[!htb]
     \centering
@@ -23,17 +32,9 @@ Modern 5-axis MTs are important to produce accurate work pieces.  According to M
 \end{figure}
  
 
-This leads to the need to build an MT which can be operated without energy inefficient cooling. A classic closed loop approach is used to achieve this. The idea is to use measured temperature data to predict the behaviour of the MT structure. Such an approach produces much data, which must be organized. This means that for different errors, different temperature sensors are relevant. Therefore a method is needed which is able to select the sensors that are relevant for the respective error. 
-
-So there are several motivations behind this thesis. In the focus is the improvement of the accuracy, which can be achieved with the methods used. On the other hand, it should be achieved that a MT can be operated thermally stable over a long period of time. This means that the MT can maintain its accuracy. As explained above, the methods used have the further advantage that the MT is less dependent on environmental influences. As a result, no strong regulation of the production site is required, making energy-inefficient cooling obsolete.
-
-The last interesting thing is that such a method can be applied to any type of MT and is no longer restricted to one specific MT. This method therefore offers many options for control manufacturers to compensate for the thermally caused errors.
-
 
 
 %-----------------------------------------------------
 \section{Outline} %Gliederung
 \label{sec:outline}
 
-
-The first part of this thesis introduces the topic of thermal errors of MT. With this basis, the methods used to compensate for these thermal errors are explained. In order to get an understanding of the topic of input selection, it is explained how this is done in the current state of the art. Once the basics have been clarified, the procedure required to implement the input selection method used here is explained. To test how the method works, the implementation is then evaluated with test data. For this purpose data is used, which has been collected before and is available for this work. Finally, the obtained data sets are evaluated and compared with the previously used method.

@@ -1,7 +1,7 @@
 \chapter{Methodology}
 \label{chp:sample_chapter}
 
-Hallo
+
 
 In this chapter, the methods used are first introduced and then linked, so that the algorithm for solving the problem can be understood. In a first step, the model needed to predict the thermal error is introduced. Next, the Group LASSO method is explained, which is needed to select the optimal inputs.  In order to get the best possible access to the method, it is introduced from scratch by starting from the least square problem.  
 The model used for prediction contains parameters that must be well chosen. For this reason, in a third step the PSO is introduced, solving the problem in an efficient way. Finally, all methods are brought into relation with each other.
@@ -324,29 +324,6 @@ The choice of the parameters $\omega$, $c_k$ and $c_s$ has a relatively big infl
 The method of PSO is generally defined for the number space of the real numbers $\mathbb{R}^n$. When optimizing the orders of the ARX model, however, a particle can only assume integer position ($\in \mathbb{N}^n$) values in-between 1 and 10. In this thesis , this problem is solved by rounding the values of the positions vector $p_i$ to integer values after each iteration and then using the vector obtained in this way for the next iteration. This method works well, but can still be expanded. This problem is being discussed more and more in the literature and there are some suggestions how the problem could be addressed \cite{Kennedy_1997,Lee_2008,Unler_2010}.
 
 %***********************************************************************
-
-
-\section{Sensitivity Analysis}
-\label{sec:sensitivity_analysis}
-
-To check whether the PSO method always converges against the same solution, the same experiment is performed several times. The same orders should always be chosen for the respective inputs.
-
-The test is done with 100 random experiments, which are evaluated. The result is shown in figure \ref{sec:sensitivity_analysis}. In the middle plot the inputs are plotted on the X-axis and the random experiments on the Y-axis. With the assumed convergence the columns should have the same values, which can be seen in the plot by the grey gradations. This is not the case at first sight. But on closer inspection it can be seen, that the inputs, which are selected (3, 4 and 5), the convergence is given.  This becomes better visible by the histograms, which are shown in the lower part of the figure. In the case of no. 4 there is a 100\% match. In the case of No. 5 there is an 80\% match, with the remaining 20\% being the same input. 
-
-In the upper plot (No. 3) no clear convergence is visible. However, it can be said that the selected order is either very small or very large. Orders in between only occur in very rare cases. 
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{inkscape/Zusammenstellung} %NOTE that no .pdf has to be written
-    \caption[Sensitivity Analysis]{In the upper plot the individual inputs are plotted on the x-axis. On the y-axis 100 experiments are plotted, which have different initial conditions, because they are chosen randomly. One row therefore always stands for one experiment. The lower two plots show the histograms for the spindle behind and the C-axis.}
-    \label{fig:flowchart}
-\end{figure}
-
-With this evaluation it can be shown that the chosen order of the selected inputs tends to a value. In certain cases (no. 4) this is very clear. In the case of No. 3 it is only evident that a range is preferred, which in this case are very large or very small orders. Since this is a heuristic method, this circumstance is not unexpected. To improve this behaviour, more particles could be used, which would require more computing time. On the other hand the tolerance of the abort criterion could be reduced, which would result in more iterations, which in turn would increase the computation time.
-
-The results obtained have shown that good and robust results can be achieved with the selected settings. 
-
-
 
 \section{Algorithm}
 \label{sec:algorithm}

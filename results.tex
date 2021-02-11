@@ -73,88 +73,18 @@ The axis errors are measured on the MT using a tactile measuring system. The mea
 \end{figure}
 
 
-\section{Evaluation of the Group LASSO Method}
-\label{sec:evaluationglmethod}
 
-This section deals with the results which can be achieved using the implemented algorithm. The Group LASSO method and the PSO are considered at the same time. In order to present the whole in a compact manner, the detailed analysis is made on a single error of the C2-axis. Since the error $E_{X0C}$ is the most critical when considering all errors, this error is used for the detailed evaluation. All other axis errors are shown in detailed in the appendix. 
 
-In the following, a distinction is made between static and adaptive sensor sets. The case in which the inputs are selected once after the calibration phase is considered as a static sensor set. If the ACL is exceeded, there is no recalibration of the optimal inputs. This approach can be used to check how well the input selection actually works. The MT cannot adapt to big changes in the environment, but only to small ones, which can be compensated by parameter update. In order to adapt to big changes, an adaptive input selection is needed.
 
-The question is, how the results obtained can be evaluated. In the calibration mode of the MT, the errors of the C2-axes are measured at the defined time intervals. Using the methods, a prediction based on this data is made. The predictions should therefore represent as exactly as possible what the MT will do in the next time steps. These prediction is then used to correct the MT by the value by which it will deviate according to the prediction. So it is of great interest that the prediction follows the effective errors as closely as possible. One of the values by which this quality can be clearly seen is the difference between the prediction and the effective error.(eq. \ref{eq:compensation}).
 
- \begin{equation}
-	E_{comp} = E_{predict} - E_{uncomp}
-	\label{eq:compensation}
-\end{equation}
-
-\subsection{Static Sensor Set}
-\label{sec:static_sensor_set}
-
-First the compensation results of a static sensor set are discussed. The aim here is to see how the Group LASSO method works for itself. Long-term stability is not expected. So it does not matter if the compensation exceeds the ACL over time. The evaluation is based on the error $E_{X0C}$. The upper subplot in figure \ref{fig:X0Cstatisch} shows the uncompensated and compensated thermal error $E_{X0C}$. The bottom subplot in figure \ref{fig:X0Cstatisch} shows the inputs that have been selected in this case. 
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{results/X0C_stat_bearb} %NOTE that no .pdf has to be written
-    \caption[Detail deviation $E_{X0C}$ - static]{Detail view of static sensor set.Uncompensated and compensated thermal
-    error $E_{X0C}$ over 108 h for the thermal load shown in Fig. \ref{fig:speedprofil}. The listed sensors (S) for each time interval are defined as the optimal model inputs of the corresponding compensation model through the static input selection. The horizontal black dashed lines represent the ACL. The black vertical line shows the time of the model setup and the black vertical dashed lines the exceedance of the ACL of any thermal error of the C-axis.}
-    \label{fig:X0Cstatisch}
-\end{figure}
-
-After the training period of 12 hours, the inputs are selected (black vertical line). 3 inputs are selected from the 25 possible inputs. The maximum number of inputs is not fixed, but should generally not exceed the number of 5 inputs. This is important because the number of selected inputs depends strongly on the AIC, which has been modified for this thesis. 
-
-The sensor in the front of the spindle $S1$, the sensor rear the spindle $S2$ and the C-axis sensor $S3$ are selected as inputs. The temperature of the C-Axis has a relatively large influence. The uncompensated error $E_{X0C}$ follows the temperature of the C-Axis relatively strongly, which can be seen from the arrows in Figure \ref{fig:X0Cstatisch}. For this reason it is not surprising and to be expected that this input will be selected. With the two other inputs, the choice is not so clear. These are relatively similar, which is not to be expected. For sensors $S1$ and $S2$ it is not obvious why they are chosen. However, on closer analysis a physical connection can be seen. Since the spindle is not subject to any load case in this experiment, these sensors reflect the ambient temperatures and the influence of the cooling up to a certain degree. Furthermore, it is also possible that the spindle also has a small influence on the displacement, since we only measure relatively between workpiece and tool. It can be assumed that the sensors are not selected if the spindle is exposed to a load case.
-
-In summary, it can be said that the method works for itself. The Group LASSO method in combination with the PSO delivers results that are stable over a longer period of time and keep the compensation within the framework of the ACL. In order to drastically increase long-term stability, the method is operated using an adaptive sensor set, which is discussed below.\\
 
 \subsection{Adaptive Sensor Set}
 \label{sec:adaptive_sensor_set}
 
-Figure \ref{fig:X0Cadaptiv} shows the evaluation using the adaptive input selection. The measurements are the same, used in Figure \ref{fig:X0Cstatisch}. This allows the two experimental setups to be compared and conclusions to be drawn about the differences.
 
-After 12 h training time, the optimal inputs are selected from the available sensors. As expected, these are the same ones that have already been selected for the static sensor set. After a time of approx. 40 hours, the compensation exceeds the ACL for the first time. The MT goes into the mode with increased measuring frequency in order to have enough data to recalibrate the optimal inputs. This can be seen from the time delay $\Delta t$ between exceeding the ACL and selecting the inputs again.
-
-The selection of the new inputs show that three inputs are selected as before. The number of selected inputs is again less than five, which suggests that the methodology of the adjusted AIC value works. The selected inputs do not change too much. Two out of three selected inputs are selected again, which speaks for the fact that the method does not select arbitrarily, but always comes back to the inputs that are important.
-
-An input is now selected that is not directly influenced by the heat of the MT. It is an input from the environment, which is now used to determine the optimal model. This shows nicely that the slowly changing environment has an influence on the behaviour of MT.
-
-
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{results/X0C_adaptiv_bearb} %NOTE that no .pdf has to be written
-    \caption[Detail deviation $E_{X0C}$ - adaptive]{Uncompensated and compensated thermal
-    error using the adaptive input selection over 108 h for the thermal load shown in Fig. \ref{fig:speedprofil}. The listed sensors (S) for each time interval are defined as the optimal model inputs of the corresponding compensation Model. The horizontal black dashed lines represent the ACL. The black vertical line shows the time of the model setup and the black vertical dashed lines the exceedance of the ACL of any thermal error of the C-axis. The dotted indicates the reselection of the model inputs after a NG mode. There is one NG mode, in which the inputs are newly selected.}
-    \label{fig:X0Cadaptiv}
-\end{figure}
-
-When looking at the upper subplot of Figure \ref{fig:X0Cadaptiv}, it can be seen that the compensation results are quiet good. The newly selected inputs mean that the ACL is no longer exceeded in the following. In summary the method gives good results. With the adaptive sensor set, long-term stability can also be achieved, as it is required in industry. The fact that the ACL is rarely exceeded shows that the selected inputs are well chosen. This means that the method is also interesting from an economic point of view, since the unproductive time required for measuring at a higher frequency can be reduced to a minimum.
 
 \subsection{Comparison Between Static and Adaptive Sensor Set}
 \label{sec:comparison_static_adaptive}
-
-Since an adaptive sensor set is more complex, the question arises whether the effort is worthwhile. In this section a comparison between static and adaptive Sensor Set is made.
-
-The results of all translational errors are shown in Figure \ref{fig:kompensation_trans}. The upper subplot shows the compensation using a static sensor set, the lower subplot shows the compensation using an adaptive sensor set. Here it can be seen why the deviation $E_{X0C}$ has been chosen in the above examples. The deviations are greatest with this error. The deviation $ E_{Y0C}$ is not included in this plot, since this error only shows a noise that does not have to be compensated (see appendix).
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{results/kompensation_trans} %NOTE that no .pdf has to be written
-    \caption[All translational deviations]{Residual errors of the translational thermal errors of the C-axis by using the TALC methodology with a static and an adaptive sensor set. The horizontal black dashed lines represent the ACL. The solid vertical line shows time of the model setup and the dashed vertical lines the exceedance of the ACL, the NG modes.}
-    \label{fig:kompensation_trans}
-\end{figure}
-
-When considering all translational errors, it can be summarized that the results meet the requirements. When looking at the rotational errors shown in figure \ref{fig:kompensation_winkel}, it can also be seen that the requirements are fulfilled. It should be noted that the threshold value for the ACL of the rotational errors are given in $\mu m/m$. It can be seen that the deviation $E_{C0C}$ exceeds the ACL. As discussed in the section on translational deviations, this leads to an increase in the frequency of the measuring cycle in the adaptive sensor set and then to a new selection of the inputs. It can be seen that the compensation is especially slightly better after a longer time than in the case of the static sensor set. It can thus be said that the method can also meet the specifications for rotational errors.
-
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{results/kompensation_alle_winkel} %NOTE that no .pdf has to be written
-    \caption[All angles deviations]{Residual errors for the rotational errors of the C-axis by using the TALC methodology with a static and an adaptive sensor set. The horizontal black dashed lines represent the ACL. The solid vertical line shows time of the model setup and the dashed vertical lines the exceedance of the ACL, the NG modes.}
-    \label{fig:kompensation_winkel}
-\end{figure}
-
-To be able to make a qualitative statement, the data are analysed statistically. An overview of the characteristic values obtained is shown in table \ref{Tab:statistic_GL}. This clearly shows that the values obtained using a static sensor set are good. The results, obtained using a adaptive sensor set are as expected even better. Looking at the $95^{th}$ percentile of the error $E_{X0C}$ with adaptive sensor set, it becomes clear that the accuracy obtained in this way is very good for a 5-axis MT. The 95\% percentile of all values are in a range of 1.4 $\mu m$.
-
 
 
 \begin{table}[!htb]
@@ -182,66 +112,8 @@ Error  & \multicolumn{2}{l}{Peak value} \hspace{2cm} & \multicolumn{2}{l}{Root m
 \end{threeparttable}
 \end{table}
 
-When looking at the results, it becomes clear that the method works. The required values can be met and the compensation delivers very good results. The static sensor set has been used to prove that the Group LASSO method works. Using the adaptive sensor set, it has been shown that long-term stability is increased. The validation of the method can therefore be regarded as successful.
-
 
 \section{Comparison to the TCK method}
 \label{sec:comparisonTCK}
-
-The task of this thesis is to evaluate the Group LASSO method. As already shown in section \ref{sec:evaluationglmethod}, this has worked very well to solve the problem. However, it is now of great interest to see how the methodology compares with the previous TCK method.
-
-All translational errors can be seen in figure \ref{fig:all_methods}. In the upper subplot, the compensation is done using the TCK method. It shows that the results obtained are good. The ACL is exceeded twice and an input selection takes place reliably. The long-term performance is given. 
-
-The lower subplot shows the Group LASSO method with an adaptive sensor set. After one renewed input selection, long-term stability can also be achieved with the Group LASSO method.
-
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.9\linewidth]{results/Comparison_TCK_GL} %NOTE that no .pdf has to be written
-    \caption[Deviations - All methods]{Residual errors for the translational thermal errors of the C-axis by using the TALC methodology with the TCK Method and Group LASSO Method respectively. An adaptive Sensor Set is used for both methods.}
-    \label{fig:all_methods}
-\end{figure}
-
-To be able to make a qualitative statement, the data are also statistically evaluated. This evaluation is listed in table \ref{Tab:statistic_comp}. It can be seen that the root mean square error can be reduced by up to 75\% using the Group LASSO method ($E_{A0C}$). Or the $95^{th}$ percentile can be reduced by over 50\% ($E_{X0C}$). The results obtained with the Group LASSO method show better values in all points than those obtained with the TCK method. Only with the error $E_{R0T}$ the TCK method gives better results.
-
-This evaluation shows that the Group LASSO method works at least as well as the previous TCK method. So it can be seen as an alternative method.
-
-
-\begin{table}[ht]
-\centering
-\begin{threeparttable}
-%\captionsetup {width = 10cm}
-\caption[Statistical evaluation of the data and comparison of the methods - TCK vs. GL]{Comparison between Group LASSO (GL) and TCK Method. Thermal position and orientation errors, nomenclature from \cite{Blaser_2017}, for the investigated C-axis. The negative sign in the category peak value reduction means there is an increase of the thermal error due to the compensation)}
-\begin{tabular}{c c c c c c c}
-\hline
-Error  & \multicolumn{2}{l}{Peak value} \hspace{2cm} & \multicolumn{2}{l}{Root mean square} \hspace{2cm} & \multicolumn{2}{l}{$\mathrm{95^{th}}$ percentile} \vspace{-0.2cm} \\
- & \multicolumn{2}{l}{reduction [\%]} & \multicolumn{2}{l}{error $\mu m / (\mu m / m)$} & \multicolumn{2}{l}{$\mu m / (\mu m / m)$} \\
-\hline
-  & TCK & GL & TCK & GL & TCK & GL \\
-  \hline \vspace{-0.2cm}
- $\mathrm{E_{X0C}}$ & 68 & 76 & 1.5 & 1.0 & 3.0 & 1.4  \\ \vspace{-0.2cm}
- $\mathrm{E_{Y0C}}$ & -4 & 41 & 0.4 & 0.4 & 0.7 & 0.8  \\ \vspace{-0.2cm}
- $\mathrm{E_{R0T}}$ & 91 & 93 & 1.0 & 1.0 & 1.3 & 1.8  \\ \vspace{-0.2cm}
- $\mathrm{E_{Z0T}}$ & 85 & 94 & 0.4 & 0.3 & 0.7 &  0.5 \\ \vspace{-0.2cm}
- $\mathrm{E_{A0C}}$ & -29 & 13 & 1.3 & 1.1 & 2.3 & 1.6  \\ \vspace{-0.2cm}
- $\mathrm{E_{B0C}}$ & 63 & 78 & 1.7 & 1.5 & 3.2 & 2.9  \\ 
- $\mathrm{E_{C0C}}$ & 5 & 58 & 2.6 & 2.6 & 4.4 & 2.1  \\ 
-\hline
-\end{tabular}
-\label{Tab:statistic_comp}
-\end{threeparttable}
-\end{table}
-
-
-\subsection{Optimization and Runtime}
-\label{sec:opt_runtime}
-
-The question now, which Variable should be optimized using PSO. The best option turns out to be optimization based on the AIC. The AIC, which is introduced in section \ref{sec:Akaike}, specifies how the quality of a solution relates to the number of model parameters and selected inputs.
-
-The method works very well on the results side. As described, the results can even be slightly improved compared to the previous TCK method. As a disadvantage, however, it turns out that the methodology is relatively time-consuming. Therefore, it is currently not yet possible to run the method in real time.
-
-The implementation in MATLAB is certainly not the most efficient option to program the PSO optimization in a computationally efficient way. In order to make the code more efficient, it is therefore considered whether and how the code can be parallelized. The function $parfor$ is used for this, which enables the code to be executed in parallel directly in MATLAB.
-
-The problem of the runtime must be looked at in further work. The first option to consider is what the runtime looks like when the code runs on a cluster. Attempts have been made to use the $Euler$ cluster from the ETH Zurich. However, this was not pursued further due to time constraints. In view of the application in the industrial environment, such outsourcing must be brewed. In a further step, the method must be translated into a more efficient programming language. C ++ would be a much more efficient language for this. Andrew \cite{Andrews2017}, who compares the two languages, gives a comparison of the computing times between MATLAB and C ++.
 
 \
