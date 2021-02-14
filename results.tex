@@ -8,7 +8,7 @@ This chapter presents the results of the adaptive input selection using the deve
 \section{Machine Setup and Sensors}
 \label{sec:machine_setup}
 
-Data that are used to check the algorithm are generated on a 5-axis MT as sketched in figure \ref{fig:Design}. The algorithm is therefore not tested and evaluated live on the MT, but rather using data records that were previously generated. The method is used to compensate the thermal position and orientation errors of the C2-axis. The kinematic chain of the MT can be described as follows according to ISO 10791-1:2015 \cite{ISO_10791}: 
+
 
 V [w C2' A' X' b Y Z C1 t].
 
@@ -23,8 +23,6 @@ The temperatures are measured within and around the MT. There are 8 sensors in t
 
 \section{Experimental Setup}
 \label{sec:experimentalsetup}
-
-The MT is taught in in a calibration phase (CP) of 12 hours. This means that in these 12 hours the temperatures as well as the thermal errors are measured in an interval of 5 minutes. This frequency is assumed so that enough data is available. After the calibration phase, the measuring interval is extended to 60 minutes, which is also maintained until the Action Control Limit (ACL) is exceeded. If the ACL is exceeded, the measurement interval is shortened again to 5 minutes so that sufficient measurement data can be collected to recalibrated the inputs used. In order to make an input selection, 24 measurements are required in 5 minute intervals. So it takes 2 h to collect the data, that a current input selection can be made. The used parameter setup of the TALC approach can be found in table \ref{Tab:Experimental_setup}.
 
 
 \begin{table}[!htb]
@@ -51,9 +49,7 @@ Parameter \hspace{7cm} & Value\\
 \end{table}
 
 
-In the conducted experiments, the thermal load case is realized by a random speed profile of the C2-axis over 108 h. These is operated over the test period according to a predefined speed profile, which can be seen in figure \ref{fig:speedprofil}. The heat introduced thereby simulates the real operation of the MT.
 
-In this experiment, the inputs $u$ correspond to the temperatures measured within and around the MT, as already defined in the methodology section. The output $y$ corresponds to the thermal errors of the C2-axis, which are measured on the MT.
 
 
 \begin{figure}[!htb]
@@ -63,7 +59,7 @@ In this experiment, the inputs $u$ correspond to the temperatures measured withi
     \label{fig:speedprofil}
 \end{figure}
 
-The axis errors are measured on the MT using a tactile measuring system. The measuring cycle is a discrete R-test, which is introduced by Weikert \cite{Weikert2004} and Ess \cite{Ess2011}. The X, Y and Z positions of the reference sphere are measured by moving the C2-axis as described in \cite{Blaser2014}. In each position of the C-axis the position of the reference sphere is measured as shown in figure \ref{fig:messzyklus.}. The thermal orientation and position error of the rotation axis are then calculated from the measurements. A first measurement is needed to minimize the influence of geometric errors on the MT. This first measurement is then always subtracted from the current measurements.
+
 
 \begin{figure}[!htb]
     \centering
@@ -71,16 +67,6 @@ The axis errors are measured on the MT using a tactile measuring system. The mea
     \caption[Measuring cycle]{Used measuring cycle. The position of the sphere is measured in each specific axis position. Abbildung gemäss Blaser et al. \cite{Blaser_2017}}
     \label{fig:messzyklus.}
 \end{figure}
-
-
-
-
-
-
-
-\subsection{Adaptive Sensor Set}
-\label{sec:adaptive_sensor_set}
-
 
 
 \subsection{Comparison Between Static and Adaptive Sensor Set}
