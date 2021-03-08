@@ -15,6 +15,11 @@ The temperature sensors are referred to as input in the following and are abbrev
 \subsection{Modelling of thermal errors}
 \label{sec:modelling of errors}
 
+Thermal faults are measured at a wide variety of locations throughout the machine. 
+
+(Picture of the machine with all sensors)
+
+Explanation of the thermal errors. Explanation of what the influence of the cutting fluid is and how it can be recognized. As soon as the cutting fluid is switched off, undercooling takes place. This is due to evaporation, which extracts heat from the material. This undercooling can be seen in the plots by the kink that can be seen after the cutting fluid is switched off.
 
 
  \begin{equation}
@@ -121,7 +126,12 @@ By these transformations equation \ref{eq:arx_eq_extendet} can be transformed to
 	\label{eq:solution_w_LS}
 \end{equation}
 
+\section{Machine Learning}
+\label{sec:machine_learning}
 
+In the case of this problem set, we have the problem, that we have to treat time series. This means, that it is difficult to use classical machine learning approaches. As an example, we can not use cross validation to validate the training and test data, what makes the Problem more difficult.
+
+Relatively small amount of Data, because it is expensive to generate data.
 
 \section{Group LASSO Method}
 \label{sec:Group_LASSO}
@@ -165,6 +175,11 @@ By these transformations equation \ref{eq:arx_eq_extendet} can be transformed to
 
 \subsection{Adaptive Group LASSO Equation}
 \label{sec:Adaptive_GroupLassoEq}
+
+ \begin{equation}
+	\hat{\underline{\theta}}_{GL} = \mathrm{arg \underset{\theta} min} \Vert \underline{\underline{W}}^{\frac{1}{2}} (\underline{Y}-\underline{\underline{\Phi}} \, \underline{\theta}) \Vert^2_2 + \lambda \sum_{m=1}^p \dfrac{1}{\Vert \tilde{\theta}_m \Vert^\gamma} \sqrt{n^m_b} \Vert \underline{\theta}^m_B \Vert_2
+	\label{eq:adaptive_grouplasso}
+\end{equation}
 
 
 \subsection{Alternating Direction Method of Multipliers}
@@ -216,6 +231,9 @@ By these transformations equation \ref{eq:arx_eq_extendet} can be transformed to
 \section{Information Criterion}
 \label{sec:Information_Criterion}
 
+The choice of the information criterion is crucial for the quality of the compensation, as well as the stability of the algorithm. In the literature there is a large selection of information criteria, which all have their own peculiarities and favor or penalize certain properties. The methodology used showed a behavior that tends to select too many inputs. Thus, an information criterion is needed that strongly penalizes many inputs. 
+
+The algorithm was tested using three different information criteria. These are the Akaike Information Criterion (AIC), the Bayes Information Criterion (BIC), and the Pham Information Criterion (PIC). The formula for these three information criteria are listed below.
 
 
  \begin{equation}
@@ -236,6 +254,14 @@ By these transformations equation \ref{eq:arx_eq_extendet} can be transformed to
 	\label{eq:aic_rms_adapt}
 \end{equation}
 
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/Model_complexity} %NOTE that no .pdf has to be written
+    \caption[2D Example Least Square vs. Gruop LASSO]{Model Complexity}
+    \label{fig:model_complexity}
+\end{figure}
+
+
 
 
 \section{Order Optimization}
@@ -244,8 +270,8 @@ By these transformations equation \ref{eq:arx_eq_extendet} can be transformed to
 
 
 %***********************************************************************
-\subsection{Particle Swarm Optimization}
-\label{sec:PSO}
+\subsection{Optimization}
+\label{sec:optimization}
 
 
 
@@ -301,14 +327,6 @@ By these transformations equation \ref{eq:arx_eq_extendet} can be transformed to
 
 
 
-
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=1.0\linewidth]{powertpiont/Flussdiagramm_neu_2} %NOTE that no .pdf has to be written
-    \caption[Scheme of the algorithm]{Schematic representation of the algorithm. This includes all the methods used, which have been introduced above. The main program is shown on the left. The function to be optimized is shown on the right-hand side.}
-    \label{fig:flowchart}
-\end{figure}
 
 %-------------------------------
 
