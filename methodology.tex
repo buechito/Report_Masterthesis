@@ -267,13 +267,24 @@ The algorithm was tested using three different information criteria. These are t
 \section{Order Optimization}
 \label{sec:order_opt}
 
+Zero Order Model as generic algorithms are practicali not used, because, they need to much comutation time (computationally expensive)
 
+When you use a first order Model as stochastic gradient descent, you just can find local optima, but in applications, this ist good enough.
+
+It's a trade off between the accuracy and the cost of your algorithm.
 
 %***********************************************************************
 \subsection{Optimization}
 \label{sec:optimization}
 
+Plot of the Searching space as an 3D example. (Graphik mit bereich[1E-6 5] [0 5] [0 5] wo eine Lösung gesucht wird. Lmabda, na und nb. Daran sollte zu erkennen sein, dass nicht alle Dimensionen Gleich sind. Zeigen, dass Lambda Kontinuierlich ist, na und nb jedoch disket)
 
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/search_space} %NOTE that no .pdf has to be written
+    \caption[Scheme of particle swarm optimization]{Searching space}
+    \label{fig:flowchart}
+\end{figure}
 
 
 \begin{enumerate}

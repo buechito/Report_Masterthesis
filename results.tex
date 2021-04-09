@@ -24,6 +24,15 @@ The temperatures are measured within and around the MT. There are 8 sensors in t
 \section{Experimental Setup}
 \label{sec:experimentalsetup}
 
+\subsection{Measuring Cycle}
+\label{sec:measuring_cycle}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Inkscape/Messzyklus} %NOTE that no .pdf has to be written
+    \caption[Measuring cycle]{Used measuring cycle. The position of the sphere is measured in each specific axis position. Abbildung gemäss Blaser et al. \cite{Blaser_2017}}
+    \label{fig:messzyklus.}
+\end{figure}
 
 \begin{table}[!htb]
 \centering
@@ -50,34 +59,11 @@ Parameter \hspace{7cm} & Value\\
 
 
 
-
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{results/speedprofil} %NOTE that no .pdf has to be written
-    \caption[Speed profile]{Randomly generated speed profile of the C-axis. This runs on the MT during the test period of 108 hours.}
-    \label{fig:speedprofil}
-\end{figure}
-
-
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.5\linewidth]{Inkscape/Messzyklus} %NOTE that no .pdf has to be written
-    \caption[Measuring cycle]{Used measuring cycle. The position of the sphere is measured in each specific axis position. Abbildung gemäss Blaser et al. \cite{Blaser_2017}}
-    \label{fig:messzyklus.}
-\end{figure}
-
-
-\subsection{Comparison Between Static and Adaptive Sensor Set}
-\label{sec:comparison_static_adaptive}
-
-
 \begin{table}[!htb]
 \centering
 \begin{threeparttable}
 %\captionsetup {width = 10cm}
-\caption[Statistical evaluation of the data and comparison of the methods - static vs. adaptive]{Thermal position and orientation errors obtained with the Group LASSO Method.  Nomenclature from \cite{Blaser_2017}, for the investigated C-axis. The negative sign in the category peak value reduction means there is an increase of the thermal error due to the compensation.}
+\caption[Statistical evaluation of the data and comparison of the methods - static vs. adaptive]{ compensation.}
 \begin{tabular}{c c c c c c c}
 \hline
 Error  & \multicolumn{2}{l}{Peak value} \hspace{2cm} & \multicolumn{2}{l}{Root mean square} \hspace{2cm} & \multicolumn{2}{l}{$\mathrm{95^{th}}$ percentile} \vspace{-0.2cm} \\
@@ -99,10 +85,10 @@ Error  & \multicolumn{2}{l}{Peak value} \hspace{2cm} & \multicolumn{2}{l}{Root m
 \end{table}
 
 
-\section{Comparison to the TCK method}
-\label{sec:comparisonTCK}
+\section{Thermal Stimulation}
+\label{sec:thermal_stimulation_results}
 
-\subsection{Graphical User Interface (GUI)}
+\section{Graphical User Interface (GUI)}
 \label{sec:graphical_user_interface}
 
 \
