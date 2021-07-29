@@ -1,8 +1,32 @@
 \chapter{Methodology}
 \label{chp:sample_chapter}
 
+This work makes use of some machine learning methods. The topic of machine learning is very large, so this paragraph section the field of machine learning in which this work is located.
+
+Supervised vs Unsupervised Learning. Short explanation about the differences of this two types of Models. The used Group LASSO Method is a supervised learning Model.....
+The earlier used TCK Method for example is a unsupervised Model because.....
+
+Advantages / Disadvantages of the two Models....
+
+In the case of this problem set, we have the issue, that we have to treat time series. This means, that it is difficult to use classical machine learning approaches. As an example, we can not use cross validation to validate the training and test data, what makes the Problem more difficult.
+
+Relatively small amount of Data, because it is expensive to generate data.
+
+The data must be labeled so that the inputs can be assigned to the corresponding output, which is necessary when training the models.
 
 %***********************************************************************
+\section{Data Preprocessing}
+\label{sec:Data_Preprocessing}
+
+\subsection{Outlier Detection}
+\label{sec:Outlier_Detection}
+
+To get good results, the data needs to be preprocessed. The raw data does have outliers and other anomalies, that influences the quality of the machine learning model. The raw signal does have some error, which should be detected by a automate outlier detection algorithm.
+
+
+\subsection{Normalization of the Data}
+\label{sec:Normalization_of_the_data}
+
 
 \section{ARX Models}
 \label{sec:ARX_models}
@@ -14,12 +38,6 @@ The temperature sensors are referred to as input in the following and are abbrev
 
 \subsection{Modelling of thermal errors}
 \label{sec:modelling of errors}
-
-Thermal faults are measured at a wide variety of locations throughout the machine. 
-
-(Picture of the machine with all sensors)
-
-Explanation of the thermal errors. Explanation of what the influence of the cutting fluid is and how it can be recognized. As soon as the cutting fluid is switched off, undercooling takes place. This is due to evaporation, which extracts heat from the material. This undercooling can be seen in the plots by the kink that can be seen after the cutting fluid is switched off.
 
 
  \begin{equation}
@@ -126,20 +144,9 @@ By these transformations equation \ref{eq:arx_eq_extendet} can be transformed to
 	\label{eq:solution_w_LS}
 \end{equation}
 
-\section{Machine Learning}
-\label{sec:machine_learning}
-
-In the case of this problem set, we have the problem, that we have to treat time series. This means, that it is difficult to use classical machine learning approaches. As an example, we can not use cross validation to validate the training and test data, what makes the Problem more difficult.
-
-Relatively small amount of Data, because it is expensive to generate data.
 
 \section{Group LASSO Method}
 \label{sec:Group_LASSO}
-
-
-
-\subsection{Group LASSO Equation}
-\label{sec:GroupLassoEq}
 
 
 
@@ -162,27 +169,35 @@ Relatively small amount of Data, because it is expensive to generate data.
     \label{fig:2D_LASSO}
 \end{figure}
 
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\linewidth]{Inkscape/LASSO_parameter} %NOTE that no .pdf has to be written
-    \caption[Influence of the $\lambda$ parameter]{In the figure, the parameter Lambda is plotted against the value of the different parameters. As $\lambda$ grows, fewer and fewer inputs are selected. For $\lambda = 10^-2$ 24 of 25 Inputs are selected. For $\lambda = 10^2$ only 1 of 25 Inputs is selected.
-}
-    \label{fig:LASSO_parameter}
-\end{figure}
 
 \section{Adaptiv Group LASSO Method}
 \label{sec:Adaptive_Group_LASSO}
 
-\subsection{Adaptive Group LASSO Equation}
-\label{sec:Adaptive_GroupLassoEq}
+The Group LASSO method tends to select too many inputs. This is partly due to the way the parameter $\lambda$ is chosen, which is a direct consequence of the information criterion used. 
+On the other hand, however, this is due to the method itself, which tends to select too many inputs. For this reason, the method was further developed. The first to do so was Fan et al.\cite{Fan2006} who modified the LASSO penalty so that different amounts of shrinkage are allowed for the different regression coefficients. At the same time, Zou et al. \cite{Zou_2006} introduced the name adaptive LASSO for the Method. As with the development of the Group LASSO, which evolved from the LASSO, the adaptive LASSO method was further developed by Wang et al. \cite{Wang_2008} into the adaptive Group LASSO method, which is used in this thesis. The basic equation has the following form:
 
  \begin{equation}
-	\hat{\underline{\theta}}_{GL} = \mathrm{arg \underset{\theta} min} \Vert \underline{\underline{W}}^{\frac{1}{2}} (\underline{Y}-\underline{\underline{\Phi}} \, \underline{\theta}) \Vert^2_2 + \lambda \sum_{m=1}^p \dfrac{1}{\Vert \tilde{\theta}_m \Vert^\gamma} \sqrt{n^m_b} \Vert \underline{\theta}^m_B \Vert_2
-	\label{eq:adaptive_grouplasso}
+	\hat{\underline{\beta}}_{GL} = \mathrm{arg \underset{\beta} min} \Vert  (\underline{Y} - \sum_{l=1}^L \underline{\underline{X_l}} \, \underline{\beta_l} \Vert^2_2 + \sum_{l=1}^L \lambda_l \sqrt{p_l} \Vert \underline{\beta_l} \Vert_2
+	\label{eq:original_adaptive_grouplasso_1}
+\end{equation}
+
+The first part of the equation corresponds to the least square term, which is identical to the first term in equation \ref{eq:grouplasso_original}, where the Group LASSO method is introduced. The modification is made in the second term. The parameter $\lambda$, which is in equation \ref{eq:grouplasso_original} before the sum sign of the penalty term, moves into the sum. The subscript l shows that this is no longer a global parameter. The parameter is selected separately for each group, which makes it possible to adapt it to the different groups. This has the advantage that the parameter $\lambda$ does not have to be set for strongly varying groups, which in the end is always only a compromise. 
+
+The question arises as to how this parameter $\lambda_l$ should be set. As applied in Machine Learning ofr, this can be done using Cross Validation (CV). However, this is computationally intensive and therefore relatively expensive.  Furthermore, CV is not applicable because the concrete problem is a time series.
+
+ \begin{equation}
+	\lambda_l = \lambda \Vert \tilde{\theta}_l \Vert^{-\gamma}
+	\label{eq:lambda_parameter}
 \end{equation}
 
 
-\subsection{Alternating Direction Method of Multipliers}
+ \begin{equation}
+	\hat{\underline{\theta}}_{GL} = \mathrm{arg \underset{\theta} min} \Vert \underline{\underline{W}}^{\frac{1}{2}} (\underline{Y}-\underline{\underline{\Phi}} \, \underline{\theta}) \Vert^2_2 + \lambda \sum_{m=1}^p \Vert \tilde{\theta}_m \Vert^{-\gamma} \sqrt{n^m_b} \Vert \underline{\theta}^m_B \Vert_2
+	\label{eq:adaptive_grouplasso_2}
+\end{equation}
+
+
+\section{Alternating Direction Method of Multipliers}
 \label{sec:ADMM}
 
 
@@ -267,14 +282,19 @@ The algorithm was tested using three different information criteria. These are t
 \section{Order Optimization}
 \label{sec:order_opt}
 
-Zero Order Model as generic algorithms are practicali not used, because, they need to much comutation time (computationally expensive)
+Zero Order Model as generic algorithms are practical not used, because, they need to much computation time (computationally expensive)
 
-When you use a first order Model as stochastic gradient descent, you just can find local optima, but in applications, this ist good enough.
+When you use a first order Model as stochastic gradient descent, you just can find local optima, but in applications, this is good enough.
 
 It's a trade off between the accuracy and the cost of your algorithm.
 
 %***********************************************************************
-\subsection{Optimization}
+\subsection{Optimization by Assuming Maximum Order}
+\label{sec:optimization_may_order}
+
+
+
+\subsection{Discrete Particle Swarm Optimization}
 \label{sec:optimization}
 
 Plot of the Searching space as an 3D example. (Graphik mit bereich[1E-6 5] [0 5] [0 5] wo eine Lösung gesucht wird. Lmabda, na und nb. Daran sollte zu erkennen sein, dass nicht alle Dimensionen Gleich sind. Zeigen, dass Lambda Kontinuierlich ist, na und nb jedoch disket)
@@ -333,7 +353,7 @@ Plot of the Searching space as an 3D example. (Graphik mit bereich[1E-6 5] [0 5]
 
 %***********************************************************************
 
-\section{Algorithm}
+\section{Group LASSO for Thermal Error Compensation}
 \label{sec:algorithm}
 
 

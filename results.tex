@@ -5,57 +5,39 @@ This chapter presents the results of the adaptive input selection using the deve
 
 
 %***********************************
-\section{Machine Setup and Sensors}
-\label{sec:machine_setup}
+\section{Experimental Setup}
+\label{sec:experimental_setup}
 
-
+\subsection{Used Machine Tool}
+\label{sec:Used_Machine_Tool}
 
 V [w C2' A' X' b Y Z C1 t].
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.8\linewidth]{Inkscape/Skizze_maschine} %NOTE that no .pdf has to be written
-    \caption[Design of the machine]{Design of the MT used.}
+    \includegraphics[width=1\linewidth]{05_Results/Skizze_maschine_alle_Sensoren_eingezeichnet} %NOTE that no .pdf has to be written
+    \caption[Design of the machine]{Experimental setup. All views are shown. In the upper part all sensors are visible, which are located outside the machine tool. The lower part shows the sensors located inside the machine tool.}
     \label{fig:Design}
 \end{figure}
 
+\subsection{Sensor Positions}
+\label{sec:Sensor_Positions}
+
 The temperatures are measured within and around the MT. There are 8 sensors in the environment of the MT and 17 sensors measuring the temperature of machine components. The measured data and all sensors used are listed in detail in the appendix.
 
-\section{Experimental Setup}
-\label{sec:experimentalsetup}
 
 \subsection{Measuring Cycle}
 \label{sec:measuring_cycle}
 
+Ibaraki et al. \cite{Ibaraki2011}
+
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.5\linewidth]{Inkscape/Messzyklus} %NOTE that no .pdf has to be written
+    \includegraphics[width=0.5\linewidth]{05_Results/Messzyklus} %NOTE that no .pdf has to be written
     \caption[Measuring cycle]{Used measuring cycle. The position of the sphere is measured in each specific axis position. Abbildung gemäss Blaser et al. \cite{Blaser_2017}}
     \label{fig:messzyklus.}
 \end{figure}
 
-\begin{table}[!htb]
-\centering
-\begin{threeparttable}
-\caption[Experiment parameters]{Predefined parameters of the TALC for the experiment with a duration of 108 h (CP: calibration phase, NG: MT out of precision)}
-\begin{tabular}{l l}
-\hline
-Parameter \hspace{7cm} & Value\\
-  \hline
- Calibration phase & 12 h\\
- Measurement interval & 5 min\\
- Measurement interval (post CP) & 60 min\\
- Measurement interval (NG) & 5 min\\
- Action Control limits (ACL) & 5 $\mu m$ resp. 10 $\mu m/m$\\
- NG mode duration & 24 measurements\\
- Parameter update interval & 12 h\\
- Measurement cycle duration & 85 s\\
- Max. number of inputs per model & variable\\
-\hline
-\end{tabular}
-\label{Tab:Experimental_setup}
-\end{threeparttable}
-\end{table}
 
 
 
@@ -71,11 +53,7 @@ Error  & \multicolumn{2}{l}{Peak value} \hspace{2cm} & \multicolumn{2}{l}{Root m
 \hline
   & static & adaptive & static & adaptive & static & adaptive \\
   \hline \vspace{-0.2cm}
- $\mathrm{E_{X0C}}$ & 74 & 76 & 1.3 & 1.0 & 1.7 & 1.4 \\ \vspace{-0.2cm}
- $\mathrm{E_{Y0C}}$ & 55 & 41 & 0.3 & 0.4 & 0.6 & 0.8 \\ \vspace{-0.2cm}
- $\mathrm{E_{R0T}}$ & 95 & 93 & 0.9 & 1.0 & 1.5 & 1.8 \\ \vspace{-0.2cm}
- $\mathrm{E_{Z0T}}$ & 94 & 94 & 0.3 & 0.3 & 0.5 &  0.5\\ \vspace{-0.2cm}
- $\mathrm{E_{A0C}}$ & 16 & 13 & 1.0 & 1.1 & 1.5 & 1.6 \\ \vspace{-0.2cm}
+ $\mathrm{E_{X0C}}$ & 74 & 76 & 1.3 & 1.0 & 1.7 & 1.4 \\  \vspace{-0.2cm}
  $\mathrm{E_{B0C}}$ & 80 & 78 & 1.4 & 1.5 & 2.7 & 2.9 \\ 
  $\mathrm{E_{C0C}}$ & 56 & 58 & 2.4 & 2.6 & 1.7 & 2.1 \\
 \hline
@@ -84,11 +62,11 @@ Error  & \multicolumn{2}{l}{Peak value} \hspace{2cm} & \multicolumn{2}{l}{Root m
 \end{threeparttable}
 \end{table}
 
+\section{Input Selection}
+\label{sec:Input_Selection}
 
 \section{Thermal Stimulation}
 \label{sec:thermal_stimulation_results}
 
-\section{Graphical User Interface (GUI)}
-\label{sec:graphical_user_interface}
 
 \
